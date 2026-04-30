@@ -29,22 +29,19 @@ interface MenuItem {
 }
 
 interface Notification {
-  id: string
-  title: string
-  message: string
-  created_at: string
-  read: boolean
-  type: 'info' | 'success' | 'alert'
+  id: string;
+  title: string;
+  message: string;
+  created_at: string;
+  read: boolean;
+  type: 'info' | 'success' | 'alert';
 }
 
 export default function QADashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [notificationsOpen, setNotificationsOpen] = useState(false)
-  const [notifications, setNotifications] = useState<Notification[]>([
-    { id: '1', title: 'New Evaluation', message: 'A new evaluation was submitted for CS101.', created_at: new Date().toISOString(), read: false, type: 'info' },
-    { id: '2', title: 'System Update', message: 'The analytics engine has been updated.', created_at: new Date().toISOString(), read: false, type: 'success' }
-  ])
-  
+  const [notifications, setNotifications] = useState<Notification[]>([])
+
   const { user, logout } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
