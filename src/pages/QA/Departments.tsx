@@ -85,7 +85,7 @@ export default function Departments() {
           className="flex items-center gap-2"
           style={{
             padding: '8px 16px',
-            background: '#1d4ed8',
+            background: '#800020',
             border: 'none',
             borderRadius: '8px',
             fontSize: '13px',
@@ -101,7 +101,7 @@ export default function Departments() {
       {/* Stats Bar */}
       <div
         style={{
-          background: '#1d4ed8',
+          background: '#800020',
           borderRadius: '10px',
           padding: '14px 20px',
           display: 'flex',
@@ -121,7 +121,7 @@ export default function Departments() {
           <div style={{
             width: '28px', height: '28px',
             border: '2px solid #e2e8f0',
-            borderTop: '2px solid #1d4ed8',
+            borderTop: '2px solid #800020',
             borderRadius: '50%',
             animation: 'spin 0.8s linear infinite'
           }} />
@@ -136,9 +136,9 @@ export default function Departments() {
         }}>
           <div
             className="flex items-center justify-center rounded-xl mx-auto"
-            style={{ width: '48px', height: '48px', background: '#eff6ff', marginBottom: '12px' }}
+            style={{ width: '48px', height: '48px', background: '#fdf2f2', marginBottom: '12px' }}
           >
-            <Building2 size={22} color="#1d4ed8" />
+            <Building2 size={22} color="#800020" />
           </div>
           <p style={{ fontSize: '14px', fontWeight: 500, color: '#0f172a', margin: '0 0 4px' }}>
             No departments yet
@@ -195,9 +195,9 @@ export default function Departments() {
               <div className="flex items-center gap-3">
                 <div
                   className="flex items-center justify-center rounded-lg flex-shrink-0"
-                  style={{ width: '32px', height: '32px', background: '#eff6ff' }}
+                  style={{ width: '32px', height: '32px', background: '#fdf2f2' }}
                 >
-                  <Building2 size={14} color="#1d4ed8" />
+                  <Building2 size={14} color="#800020" />
                 </div>
                 <p style={{ fontSize: '13px', fontWeight: 500, color: '#0f172a', margin: 0 }}>
                   {dept.name}
@@ -209,9 +209,9 @@ export default function Departments() {
                 fontWeight: 500,
                 padding: '3px 10px',
                 borderRadius: '20px',
-                background: '#eff6ff',
-                color: '#1d4ed8',
-                border: '0.5px solid #bfdbfe',
+                background: '#fdf2f2',
+                color: '#800020',
+                border: '0.5px solid #fecaca',
                 display: 'inline-block'
               }}>
                 {dept.code}
@@ -344,7 +344,7 @@ export default function Departments() {
                 style={{
                   flex: 1,
                   padding: '10px',
-                  background: '#1d4ed8',
+                  background: '#800020',
                   border: 'none',
                   borderRadius: '8px',
                   fontSize: '13px',

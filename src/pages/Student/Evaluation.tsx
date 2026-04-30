@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { CheckCircle, AlertCircle, ChevronRight, Star, Layers } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { type Programme, type FormQuestion } from '../../types/database.types'
+import logo from '../../assets/logo.png'
+
 
 interface CourseAssignmentOption {
   id: string
@@ -199,12 +201,12 @@ export default function StudentEvaluation() {
     return (
       <div
         className="min-h-screen flex items-center justify-center"
-        style={{ background: '#f0f4ff' }}
+        style={{ background: '#f8f9fa' }}
       >
         <div style={{
           width: '32px', height: '32px',
           border: '2px solid #e2e8f0',
-          borderTop: '2px solid #1d4ed8',
+          borderTop: '2px solid #800020',
           borderRadius: '50%',
           animation: 'spin 0.8s linear infinite'
         }} />
@@ -217,32 +219,33 @@ export default function StudentEvaluation() {
     return (
       <div
         className="min-h-screen flex items-center justify-center p-4"
-        style={{ background: '#f0f4ff' }}
+        style={{ background: '#f8f9fa' }}
       >
         <div style={{
           background: '#ffffff',
-          borderRadius: '16px',
+          borderRadius: '20px',
+          boxShadow: '0 10px 40px rgba(0,0,0,0.04)',
           border: '0.5px solid #e2e8f0',
-          padding: '40px 32px',
-          maxWidth: '440px',
+          padding: '48px 32px',
+          maxWidth: '480px',
           width: '100%',
           textAlign: 'center'
         }}>
           <div
             className="flex items-center justify-center rounded-full mx-auto"
             style={{
-              width: '64px', height: '64px',
-              background: '#f0fdf4',
-              marginBottom: '16px'
+              width: '80px', height: '80px',
+              background: '#fdf2f2',
+              marginBottom: '20px'
             }}
           >
-            <CheckCircle size={32} color="#16a34a" />
+            <CheckCircle size={40} color="#800020" />
           </div>
-          <h1 style={{ fontSize: '20px', fontWeight: 500, color: '#0f172a', margin: '0 0 8px' }}>
-            Evaluation Submitted!
+          <h1 style={{ fontSize: '24px', fontWeight: 600, color: '#0f172a', margin: '0 0 12px' }}>
+            Submission Successful!
           </h1>
-          <p style={{ fontSize: '13px', color: '#64748b', margin: '0 0 24px', lineHeight: 1.6 }}>
-            Thank you for your feedback. Your response has been recorded anonymously and will help improve the quality of teaching.
+          <p style={{ fontSize: '14px', color: '#64748b', margin: '0 0 32px', lineHeight: 1.6 }}>
+            Thank you for your valuable feedback. Your response has been recorded anonymously and will help improve our academic standards.
           </p>
           <button
             onClick={() => {
@@ -251,13 +254,16 @@ export default function StudentEvaluation() {
               setStudentInfo({ student_id: '', programme_id: '', level: '100', course_assignment_id: '' })
             }}
             style={{
-              padding: '10px 24px',
-              background: '#1d4ed8',
+              padding: '12px 32px',
+              background: '#800020',
               border: 'none',
-              borderRadius: '8px',
-              fontSize: '13px',
+              borderRadius: '10px',
+              fontSize: '14px',
+              fontWeight: 500,
               color: '#ffffff',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              boxShadow: '0 4px 12px rgba(128,0,32,0.2)'
             }}
           >
             Submit Another Evaluation
@@ -272,29 +278,32 @@ export default function StudentEvaluation() {
     return (
       <div
         className="min-h-screen"
-        style={{ background: '#f0f4ff' }}
+        style={{ background: '#f8f9fa' }}
       >
         {/* Top Bar */}
         <div style={{
-          background: '#1240ab',
+          background: '#800020',
           padding: '0 24px',
-          height: '56px',
+          height: '64px',
           display: 'flex',
           alignItems: 'center',
-          gap: '10px'
+          gap: '12px',
+          boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
         }}>
           <div
-            className="flex items-center justify-center rounded-lg"
-            style={{ width: '28px', height: '28px', background: 'rgba(255,255,255,0.15)' }}
+            className="flex items-center justify-center rounded-lg overflow-hidden"
+            style={{ width: '36px', height: '36px', background: '#ffffff', padding: '4px' }}
           >
-            <Layers size={14} color="white" />
+            <img src={logo} alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
-          <span style={{ fontSize: '14px', fontWeight: 500, color: '#ffffff' }}>
-            Student Evaluation Portal
-          </span>
-          <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginLeft: '4px' }}>
-            — Central University
-          </span>
+          <div className="flex flex-col">
+            <span style={{ fontSize: '15px', fontWeight: 600, color: '#ffffff' }}>
+              Student Evaluation Portal
+            </span>
+            <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.6)', marginTop: '-2px' }}>
+              Central University
+            </span>
+          </div>
         </div>
 
         <div style={{ maxWidth: '560px', margin: '0 auto', padding: '32px 16px' }}>
@@ -430,14 +439,14 @@ export default function StudentEvaluation() {
               {selectedAssignment && (
                 <div style={{
                   padding: '10px 12px',
-                  background: '#eff6ff',
-                  border: '0.5px solid #bfdbfe',
+                  background: '#fdf2f2',
+                  border: '0.5px solid #fecaca',
                   borderRadius: '8px'
                 }}>
-                  <p style={{ fontSize: '11px', color: '#1d4ed8', margin: '0 0 2px', fontWeight: 500 }}>
+                  <p style={{ fontSize: '11px', color: '#800020', margin: '0 0 2px', fontWeight: 500 }}>
                     Selected Course Details
                   </p>
-                  <p style={{ fontSize: '12px', color: '#1d4ed8', margin: 0 }}>
+                  <p style={{ fontSize: '12px', color: '#800020', margin: 0 }}>
                     {(selectedAssignment as any).semester} {selectedAssignment.year} · {selectedAssignment.session} Session
                   </p>
                 </div>
@@ -445,17 +454,19 @@ export default function StudentEvaluation() {
 
               <button
                 onClick={handleInfoSubmit}
-                className="flex items-center justify-center gap-2"
+                className="flex items-center justify-center gap-2 group transition-all"
                 style={{
-                  width: '100%', padding: '12px',
-                  background: '#1d4ed8', border: 'none',
-                  borderRadius: '8px', fontSize: '13px',
+                  width: '100%', padding: '14px',
+                  background: '#800020', border: 'none',
+                  borderRadius: '10px', fontSize: '14px',
+                  fontWeight: 600,
                   color: '#ffffff', cursor: 'pointer',
-                  marginTop: '4px'
+                  marginTop: '8px',
+                  boxShadow: '0 4px 12px rgba(128,0,32,0.15)'
                 }}
               >
                 Continue to Evaluation
-                <ChevronRight size={15} />
+                <ChevronRight size={16} />
               </button>
             </div>
           </div>
@@ -470,25 +481,26 @@ export default function StudentEvaluation() {
 
   // ======================== FORM STEP ========================
   return (
-    <div className="min-h-screen" style={{ background: '#f0f4ff' }}>
+    <div className="min-h-screen" style={{ background: '#f8f9fa' }}>
 
       {/* Top Bar */}
       <div style={{
-        background: '#1240ab',
+        background: '#800020',
         padding: '0 24px',
-        height: '56px',
+        height: '64px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
       }}>
         <div className="flex items-center gap-3">
           <div
-            className="flex items-center justify-center rounded-lg"
-            style={{ width: '28px', height: '28px', background: 'rgba(255,255,255,0.15)' }}
+            className="flex items-center justify-center rounded-lg overflow-hidden"
+            style={{ width: '36px', height: '36px', background: '#ffffff', padding: '4px' }}
           >
-            <Layers size={14} color="white" />
+            <img src={logo} alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
-          <span style={{ fontSize: '14px', fontWeight: 500, color: '#ffffff' }}>
+          <span style={{ fontSize: '15px', fontWeight: 600, color: '#ffffff' }}>
             Evaluation Form
           </span>
         </div>
@@ -507,12 +519,13 @@ export default function StudentEvaluation() {
 
         {/* Form Info */}
         <div style={{
-          background: '#1d4ed8',
-          borderRadius: '10px',
-          padding: '14px 16px',
-          marginBottom: '16px'
+          background: '#800020',
+          borderRadius: '12px',
+          padding: '20px',
+          marginBottom: '16px',
+          boxShadow: '0 4px 15px rgba(128,0,32,0.1)'
         }}>
-          <p style={{ fontSize: '13px', fontWeight: 500, color: '#ffffff', margin: '0 0 2px' }}>
+          <p style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', margin: '0 0 4px' }}>
             {activeForm?.title}
           </p>
           <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', margin: 0 }}>
@@ -540,10 +553,10 @@ export default function StudentEvaluation() {
           {[['5', 'Excellent'], ['4', 'Very Good'], ['3', 'Good'], ['2', 'Satisfactory'], ['1', 'Poor']].map(([n, l]) => (
             <div key={n} className="flex items-center gap-1">
               <span style={{
-                width: '18px', height: '18px',
-                background: '#1d4ed8', color: '#fff',
-                borderRadius: '50%', fontSize: '10px',
-                fontWeight: 500, display: 'inline-flex',
+                width: '20px', height: '20px',
+                background: '#800020', color: '#fff',
+                borderRadius: '50%', fontSize: '11px',
+                fontWeight: 600, display: 'inline-flex',
                 alignItems: 'center', justifyContent: 'center'
               }}>
                 {n}
@@ -591,9 +604,9 @@ export default function StudentEvaluation() {
               padding: '10px 16px'
             }}>
               <p style={{
-                fontSize: '11px', fontWeight: 500,
-                color: '#1d4ed8', textTransform: 'uppercase',
-                letterSpacing: '0.06em', margin: 0
+                fontSize: '11px', fontWeight: 600,
+                color: '#800020', textTransform: 'uppercase',
+                letterSpacing: '0.08em', margin: 0
               }}>
                 {section}
               </p>
@@ -627,10 +640,10 @@ export default function StudentEvaluation() {
                               style={{
                                 width: '36px', height: '36px',
                                 borderRadius: '50%',
-                                background: isSelected ? '#1d4ed8' : '#f8fafc',
-                                border: `0.5px solid ${isSelected ? '#1d4ed8' : '#e2e8f0'}`,
+                                background: isSelected ? '#800020' : '#f8fafc',
+                                border: `0.5px solid ${isSelected ? '#800020' : '#e2e8f0'}`,
                                 color: isSelected ? '#ffffff' : '#64748b',
-                                fontSize: '13px', fontWeight: 500,
+                                fontSize: '14px', fontWeight: 600,
                                 cursor: 'pointer',
                                 transition: 'all 0.15s',
                                 display: 'flex',
@@ -639,9 +652,9 @@ export default function StudentEvaluation() {
                               }}
                               onMouseEnter={(e) => {
                                 if (!isSelected) {
-                                  e.currentTarget.style.background = '#eff6ff'
-                                  e.currentTarget.style.borderColor = '#bfdbfe'
-                                  e.currentTarget.style.color = '#1d4ed8'
+                                  e.currentTarget.style.background = '#fdf2f2'
+                                  e.currentTarget.style.borderColor = '#fecaca'
+                                  e.currentTarget.style.color = '#800020'
                                 }
                               }}
                               onMouseLeave={(e) => {
@@ -657,8 +670,8 @@ export default function StudentEvaluation() {
                           )
                         })}
                         {answers[question.id]?.rating_value && (
-                          <span style={{ fontSize: '11px', color: '#1d4ed8', marginLeft: '4px' }}>
-                            <Star size={11} fill="#1d4ed8" color="#1d4ed8" style={{ display: 'inline', marginRight: '2px' }} />
+                          <span style={{ fontSize: '11px', color: '#800020', marginLeft: '6px', fontWeight: 500 }}>
+                            <Star size={11} fill="#800020" color="#800020" style={{ display: 'inline', marginRight: '3px', verticalAlign: 'middle' }} />
                             {['', 'Poor', 'Satisfactory', 'Good', 'Very Good', 'Excellent'][answers[question.id]?.rating_value || 0]}
                           </span>
                         )}
@@ -691,12 +704,14 @@ export default function StudentEvaluation() {
           disabled={submitting}
           className="flex items-center justify-center gap-2"
           style={{
-            width: '100%', padding: '14px',
-            background: '#1d4ed8', border: 'none',
-            borderRadius: '10px', fontSize: '14px',
-            fontWeight: 500, color: '#ffffff',
-            cursor: 'pointer', marginTop: '4px',
-            opacity: submitting ? 0.7 : 1
+            width: '100%', padding: '16px',
+            background: '#800020', border: 'none',
+            borderRadius: '12px', fontSize: '15px',
+            fontWeight: 600, color: '#ffffff',
+            cursor: 'pointer', marginTop: '8px',
+            opacity: submitting ? 0.7 : 1,
+            boxShadow: '0 4px 15px rgba(128,0,32,0.2)',
+            transition: 'all 0.2s'
           }}
         >
           {submitting ? (

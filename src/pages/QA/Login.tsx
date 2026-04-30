@@ -4,6 +4,8 @@ import { Mail, Lock, AlertCircle, ArrowRight, Shield, Layers } from 'lucide-reac
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../context/AuthContext'
 import type { QAUser } from '../../types/database.types'
+import logo from '../../assets/logo.png'
+
 
 export default function QALogin() {
   const [email, setEmail] = useState('')
@@ -52,21 +54,16 @@ export default function QALogin() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #0a1628 0%, #0c2340 50%, #0a1628 100%)' }}
+      className="min-h-screen flex items-center justify-center p-4 relative"
+      style={{ background: '#f8f9fa' }}
     >
-      {/* Glowing orbs */}
-      <div
-        className="absolute top-0 right-0 w-96 h-96 rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%)', transform: 'translate(30%, -30%)' }}
-      />
-      <div
-        className="absolute bottom-0 left-0 w-80 h-80 rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.2) 0%, transparent 70%)', transform: 'translate(-30%, 30%)' }}
-      />
-      <div
-        className="absolute top-1/2 left-0 w-64 h-64 rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(147,197,253,0.08) 0%, transparent 70%)', transform: 'translateY(-50%)' }}
+      {/* Subtle Background Pattern */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{ 
+          backgroundImage: `radial-gradient(#800020 0.5px, transparent 0.5px)`,
+          backgroundSize: '24px 24px'
+        }}
       />
 
       {/* Card */}
@@ -75,18 +72,19 @@ export default function QALogin() {
         {/* Header */}
         <div className="text-center mb-8">
           <div
-            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4"
+            className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-6 p-4"
             style={{
-              background: 'linear-gradient(135deg, #1d4ed8, #2563eb)',
-              boxShadow: '0 0 40px rgba(37,99,235,0.5)'
+              background: '#ffffff',
+              boxShadow: '0 8px 30px rgba(128,0,32,0.3)',
+              border: '1px solid rgba(128,0,32,0.1)'
             }}
           >
-            <Layers className="text-white" size={30} />
+            <img src={logo} alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
+          <h1 className="text-3xl font-bold text-[#0f172a] mb-2 tracking-tight">
             QA Evaluation Portal
           </h1>
-          <p style={{ color: '#93c5fd' }} className="text-sm font-medium">
+          <p style={{ color: '#800020' }} className="text-sm font-semibold uppercase tracking-wide">
             Student Assessment System — Central University
           </p>
         </div>
@@ -95,9 +93,9 @@ export default function QALogin() {
         <div
           className="rounded-2xl p-8"
           style={{
-            background: 'rgba(255,255,255,0.04)',
-            backdropFilter: 'blur(20px)',
-            border: '0.5px solid rgba(255,255,255,0.12)'
+            background: '#ffffff',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.05)',
+            border: '1px solid #e2e8f0'
           }}
         >
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -120,8 +118,8 @@ export default function QALogin() {
             {/* Email */}
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-widest mb-2"
-                style={{ color: '#93c5fd' }}
+                className="block text-xs font-bold uppercase tracking-widest mb-2"
+                style={{ color: '#64748b' }}
               >
                 Email Address
               </label>
@@ -129,7 +127,7 @@ export default function QALogin() {
                 <Mail
                   size={16}
                   className="absolute left-4 top-1/2 -translate-y-1/2"
-                  style={{ color: '#60a5fa' }}
+                  style={{ color: '#800020' }}
                 />
                 <input
                   type="email"
@@ -139,17 +137,17 @@ export default function QALogin() {
                   required
                   className="w-full pl-11 pr-4 py-3 rounded-xl outline-none text-sm transition-all"
                   style={{
-                    background: 'rgba(255,255,255,0.06)',
-                    border: '0.5px solid rgba(255,255,255,0.15)',
-                    color: '#e2e8f0',
+                    background: '#f8fafc',
+                    border: '1px solid #e2e8f0',
+                    color: '#0f172a',
                   }}
                   onFocus={(e) => {
-                    e.target.style.border = '0.5px solid rgba(96,165,250,0.6)'
-                    e.target.style.background = 'rgba(255,255,255,0.08)'
+                    e.target.style.border = '1px solid #800020'
+                    e.target.style.background = '#ffffff'
                   }}
                   onBlur={(e) => {
-                    e.target.style.border = '0.5px solid rgba(255,255,255,0.15)'
-                    e.target.style.background = 'rgba(255,255,255,0.06)'
+                    e.target.style.border = '1px solid #e2e8f0'
+                    e.target.style.background = '#f8fafc'
                   }}
                 />
               </div>
@@ -158,8 +156,8 @@ export default function QALogin() {
             {/* Password */}
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-widest mb-2"
-                style={{ color: '#93c5fd' }}
+                className="block text-xs font-bold uppercase tracking-widest mb-2"
+                style={{ color: '#64748b' }}
               >
                 Password
               </label>
@@ -167,7 +165,7 @@ export default function QALogin() {
                 <Lock
                   size={16}
                   className="absolute left-4 top-1/2 -translate-y-1/2"
-                  style={{ color: '#60a5fa' }}
+                  style={{ color: '#800020' }}
                 />
                 <input
                   type="password"
@@ -177,17 +175,17 @@ export default function QALogin() {
                   required
                   className="w-full pl-11 pr-4 py-3 rounded-xl outline-none text-sm transition-all"
                   style={{
-                    background: 'rgba(255,255,255,0.06)',
-                    border: '0.5px solid rgba(255,255,255,0.15)',
-                    color: '#e2e8f0',
+                    background: '#f8fafc',
+                    border: '1px solid #e2e8f0',
+                    color: '#0f172a',
                   }}
                   onFocus={(e) => {
-                    e.target.style.border = '0.5px solid rgba(96,165,250,0.6)'
-                    e.target.style.background = 'rgba(255,255,255,0.08)'
+                    e.target.style.border = '1px solid #800020'
+                    e.target.style.background = '#ffffff'
                   }}
                   onBlur={(e) => {
-                    e.target.style.border = '0.5px solid rgba(255,255,255,0.15)'
-                    e.target.style.background = 'rgba(255,255,255,0.06)'
+                    e.target.style.border = '1px solid #e2e8f0'
+                    e.target.style.background = '#f8fafc'
                   }}
                 />
               </div>
@@ -199,17 +197,17 @@ export default function QALogin() {
               disabled={loading}
               className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-white text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
               style={{
-                background: 'linear-gradient(135deg, #1d4ed8, #2563eb)',
-                boxShadow: '0 4px 24px rgba(37,99,235,0.4)'
+                background: 'linear-gradient(135deg, #800020, #9a1a3a)',
+                boxShadow: '0 4px 24px rgba(128,0,32,0.4)'
               }}
               onMouseEnter={(e) => {
                 if (!loading) {
-                  e.currentTarget.style.boxShadow = '0 6px 30px rgba(37,99,235,0.6)'
+                  e.currentTarget.style.boxShadow = '0 6px 30px rgba(128,0,32,0.6)'
                   e.currentTarget.style.transform = 'translateY(-1px)'
                 }
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 4px 24px rgba(37,99,235,0.4)'
+                e.currentTarget.style.boxShadow = '0 4px 24px rgba(128,0,32,0.4)'
                 e.currentTarget.style.transform = 'translateY(0)'
               }}
             >
@@ -230,12 +228,12 @@ export default function QALogin() {
             <div
               className="flex items-center gap-3 p-3 rounded-xl"
               style={{
-                background: 'rgba(37,99,235,0.1)',
-                border: '0.5px solid rgba(37,99,235,0.25)'
+                background: '#fdf2f2',
+                border: '1px solid #fecaca'
               }}
             >
-              <Shield size={15} style={{ color: '#60a5fa', flexShrink: 0 }} />
-              <p className="text-xs" style={{ color: '#93c5fd' }}>
+              <Shield size={15} style={{ color: '#800020', flexShrink: 0 }} />
+              <p className="text-xs" style={{ color: '#800020', fontWeight: 500 }}>
                 Secure access for QA team only. All sessions are encrypted.
               </p>
             </div>

@@ -16,6 +16,8 @@ import {
   type LucideIcon
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
+import logo from '../../assets/logo.png'
+
 
 interface MenuItem {
   name: string
@@ -47,7 +49,7 @@ export default function QADashboard() {
   const currentPage = menuItems.find(item => item.path === location.pathname)
 
   return (
-    <div className="flex h-screen" style={{ background: '#f0f4ff' }}>
+    <div className="flex h-screen" style={{ background: '#f8f9fa' }}>
 
       {/* ===================== SIDEBAR ===================== */}
       <aside
@@ -57,56 +59,58 @@ export default function QADashboard() {
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
         style={{
-          width: '220px',
-          background: '#1240ab',
-          flexShrink: 0
+          width: '240px',
+          background: '#800020',
+          flexShrink: 0,
+          boxShadow: '4px 0 15px rgba(0,0,0,0.05)'
         }}
       >
         {/* Logo */}
         <div
           className="flex items-center justify-between"
           style={{
-            padding: '20px',
-            borderBottom: '0.5px solid rgba(255,255,255,0.1)',
-            height: '64px'
+            padding: '24px 20px',
+            borderBottom: '1px solid rgba(255,255,255,0.08)',
+            height: '80px'
           }}
         >
           <div className="flex items-center gap-3">
             <div
-              className="flex items-center justify-center rounded-lg flex-shrink-0"
+              className="flex items-center justify-center rounded-xl flex-shrink-0 overflow-hidden"
               style={{
-                width: '34px',
-                height: '34px',
-                background: 'rgba(255,255,255,0.15)'
+                width: '40px',
+                height: '40px',
+                background: '#ffffff',
+                padding: '4px'
               }}
             >
-              <BookOpen size={16} color="white" />
+              <img src={logo} alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </div>
             <div>
-              <p style={{ fontSize: '13px', fontWeight: 500, color: '#ffffff', margin: 0 }}>
+              <p style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', margin: 0, letterSpacing: '0.01em' }}>
                 QA Portal
               </p>
-              <p style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)', margin: 0 }}>
+              <p style={{ fontSize: '10px', color: 'rgba(255,255,255,0.6)', margin: 0, fontWeight: 400 }}>
                 Central University
               </p>
             </div>
           </div>
-          <button onClick={() => setSidebarOpen(false)} className="lg:hidden">
-            <X size={18} color="rgba(255,255,255,0.6)" />
+          <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white/60 hover:text-white transition-colors">
+            <X size={18} />
           </button>
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 overflow-y-auto" style={{ padding: '16px 10px' }}>
+        <nav className="flex-1 overflow-y-auto custom-scrollbar" style={{ padding: '24px 12px' }}>
           <p
             className="uppercase"
             style={{
               fontSize: '10px',
-              fontWeight: 500,
+              fontWeight: 700,
               color: 'rgba(255,255,255,0.4)',
-              letterSpacing: '0.08em',
-              padding: '0 10px',
-              marginBottom: '8px'
+              letterSpacing: '0.1em',
+              padding: '0 12px',
+              marginBottom: '12px'
             }}
           >
             Main Menu
@@ -121,32 +125,32 @@ export default function QADashboard() {
                 key={item.path}
                 to={item.path}
                 onClick={() => setSidebarOpen(false)}
-                className="flex items-center gap-3 rounded-lg"
+                className="flex items-center gap-3 rounded-xl"
                 style={{
-                  padding: '9px 10px',
-                  marginBottom: '2px',
-                  background: isActive ? 'rgba(255,255,255,0.15)' : 'transparent',
-                  color: isActive ? '#ffffff' : 'rgba(255,255,255,0.55)',
+                  padding: '12px 14px',
+                  marginBottom: '4px',
+                  background: isActive ? 'rgba(255,255,255,0.12)' : 'transparent',
+                  color: isActive ? '#ffffff' : 'rgba(255,255,255,0.6)',
                   textDecoration: 'none',
-                  fontSize: '13px',
-                  fontWeight: isActive ? 500 : 400,
-                  transition: 'all 0.15s',
-                  borderLeft: isActive ? '3px solid #60a5fa' : '3px solid transparent',
+                  fontSize: '13.5px',
+                  fontWeight: isActive ? 600 : 500,
+                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                  borderLeft: isActive ? '4px solid #ffffff' : '4px solid transparent',
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.08)'
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.06)'
                     e.currentTarget.style.color = '#ffffff'
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!isActive) {
                     e.currentTarget.style.background = 'transparent'
-                    e.currentTarget.style.color = 'rgba(255,255,255,0.55)'
+                    e.currentTarget.style.color = 'rgba(255,255,255,0.6)'
                   }
                 }}
               >
-                <Icon size={15} />
+                <Icon size={16} strokeWidth={isActive ? 2.5 : 2} />
                 <span>{item.name}</span>
               </Link>
             )

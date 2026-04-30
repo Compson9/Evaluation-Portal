@@ -128,7 +128,7 @@ export default function Courses() {
   }
 
   const levelColors: Record<number, { bg: string; color: string; border: string }> = {
-    100: { bg: '#eff6ff', color: '#1d4ed8', border: '#bfdbfe' },
+    100: { bg: '#fdf2f2', color: '#800020', border: '#fecaca' },
     200: { bg: '#f0fdf4', color: '#16a34a', border: '#bbf7d0' },
     300: { bg: '#fffbeb', color: '#b45309', border: '#fde68a' },
     400: { bg: '#fdf4ff', color: '#9333ea', border: '#e9d5ff' },
@@ -152,7 +152,7 @@ export default function Courses() {
           className="flex items-center gap-2"
           style={{
             padding: '8px 16px',
-            background: '#1d4ed8',
+            background: '#800020',
             border: 'none',
             borderRadius: '8px',
             fontSize: '13px',
@@ -167,7 +167,7 @@ export default function Courses() {
 
       {/* Stats Bar */}
       <div style={{
-        background: '#1d4ed8',
+        background: '#800020',
         borderRadius: '10px',
         padding: '14px 20px',
         display: 'flex',
@@ -186,7 +186,7 @@ export default function Courses() {
           <div style={{
             width: '28px', height: '28px',
             border: '2px solid #e2e8f0',
-            borderTop: '2px solid #1d4ed8',
+            borderTop: '2px solid #800020',
             borderRadius: '50%',
             animation: 'spin 0.8s linear infinite'
           }} />
@@ -201,9 +201,9 @@ export default function Courses() {
         }}>
           <div
             className="flex items-center justify-center rounded-xl mx-auto"
-            style={{ width: '48px', height: '48px', background: '#eff6ff', marginBottom: '12px' }}
+            style={{ width: '48px', height: '48px', background: '#fdf2f2', marginBottom: '12px' }}
           >
-            <BookOpen size={22} color="#1d4ed8" />
+            <BookOpen size={22} color="#800020" />
           </div>
           <p style={{ fontSize: '14px', fontWeight: 500, color: '#0f172a', margin: '0 0 4px' }}>
             No courses yet
@@ -254,8 +254,8 @@ export default function Courses() {
                 <span style={{
                   fontSize: '12px', fontWeight: 500,
                   padding: '3px 10px', borderRadius: '20px',
-                  background: '#eff6ff', color: '#1d4ed8',
-                  border: '0.5px solid #bfdbfe',
+                  background: '#fdf2f2', color: '#800020',
+                  border: '0.5px solid #fecaca',
                   display: 'inline-block'
                 }}>
                   {course.code}
@@ -510,7 +510,7 @@ export default function Courses() {
                 className="flex items-center justify-center gap-2"
                 style={{
                   flex: 1, padding: '10px',
-                  background: '#1d4ed8', border: 'none',
+                  background: '#800020', border: 'none',
                   borderRadius: '8px', fontSize: '13px',
                   color: '#ffffff', cursor: 'pointer',
                   opacity: saving ? 0.7 : 1

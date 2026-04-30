@@ -109,14 +109,14 @@ export default function Analytics() {
       value: stats.totalEvaluations,
       icon: FileText,
       color: '#ffffff',
-      bg: '#1d4ed8'
+      bg: '#800020'
     },
     {
       title: 'Total Lecturers',
       value: stats.totalLecturers,
       icon: Users,
       color: '#ffffff',
-      bg: '#1240ab'
+      bg: '#800020'
     },
     {
       title: 'Total Courses',
@@ -130,7 +130,7 @@ export default function Analytics() {
       value: stats.overallAverage || '—',
       icon: TrendingUp,
       color: '#ffffff',
-      bg: '#2563eb'
+      bg: '#9a1a3a'
     }
   ]
 
@@ -140,7 +140,7 @@ export default function Analytics() {
         <div style={{
           width: '28px', height: '28px',
           border: '2px solid #e2e8f0',
-          borderTop: '2px solid #1d4ed8',
+          borderTop: '2px solid #800020',
           borderRadius: '50%',
           animation: 'spin 0.8s linear infinite'
         }} />
@@ -183,7 +183,7 @@ export default function Analytics() {
             className="flex items-center gap-2"
             style={{
               padding: '8px 14px',
-              background: '#1d4ed8',
+              background: '#800020',
               border: 'none',
               borderRadius: '8px',
               fontSize: '12px',
@@ -265,9 +265,9 @@ export default function Analytics() {
             <div style={{ textAlign: 'center', padding: '32px 0' }}>
               <div
                 className="flex items-center justify-center rounded-lg mx-auto"
-                style={{ width: '40px', height: '40px', background: '#eff6ff', marginBottom: '10px' }}
+                style={{ width: '40px', height: '40px', background: '#fdf2f2', marginBottom: '10px' }}
               >
-                <BarChart3 size={18} color="#1d4ed8" />
+                <BarChart3 size={18} color="#800020" />
               </div>
               <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0 }}>
                 No data yet. Charts will appear once students submit evaluations.
@@ -297,7 +297,7 @@ export default function Analytics() {
                     fontSize: '12px'
                   }}
                 />
-                <Bar dataKey="average" fill="#1d4ed8" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="average" fill="#800020" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}
@@ -328,7 +328,7 @@ export default function Analytics() {
                     <p style={{ fontSize: '12px', fontWeight: 500, color: '#0f172a', margin: 0 }}>
                       {lecturer.name}
                     </p>
-                    <p style={{ fontSize: '12px', color: '#1d4ed8', fontWeight: 500, margin: 0 }}>
+                    <p style={{ fontSize: '12px', color: '#800020', fontWeight: 500, margin: 0 }}>
                       {lecturer.average > 0 ? `${lecturer.average}/5` : '—'}
                     </p>
                   </div>
@@ -341,7 +341,7 @@ export default function Analytics() {
                     <div style={{
                       height: '100%',
                       width: `${lecturer.average > 0 ? (lecturer.average / 5) * 100 : 0}%`,
-                      background: '#1d4ed8',
+                      background: '#800020',
                       borderRadius: '3px',
                       transition: 'width 0.5s ease'
                     }} />
@@ -379,7 +379,7 @@ export default function Analytics() {
                   padding: '10px 14px',
                   background: '#f8faff',
                   border: '0.5px solid #e2e8f0',
-                  borderLeft: '3px solid #1d4ed8',
+                  borderLeft: '3px solid #800020',
                   borderRadius: '0 8px 8px 0',
                   fontSize: '13px',
                   color: '#374151'
@@ -394,8 +394,8 @@ export default function Analytics() {
 
       {/* Rating Scale Guide */}
       <div style={{
-        background: '#eff6ff',
-        border: '0.5px solid #bfdbfe',
+        background: '#fdf2f2',
+        border: '0.5px solid #fecaca',
         borderRadius: '10px',
         padding: '14px 16px',
         display: 'flex',
@@ -403,7 +403,7 @@ export default function Analytics() {
         gap: '24px',
         flexWrap: 'wrap'
       }}>
-        <p style={{ fontSize: '12px', fontWeight: 500, color: '#1d4ed8', margin: 0 }}>
+        <p style={{ fontSize: '12px', fontWeight: 500, color: '#800020', margin: 0 }}>
           Rating Scale:
         </p>
         {[
@@ -416,7 +416,7 @@ export default function Analytics() {
           <div key={num} className="flex items-center gap-2">
             <span style={{
               width: '22px', height: '22px',
-              background: '#1d4ed8',
+              background: '#800020',
               color: '#ffffff',
               borderRadius: '50%',
               fontSize: '11px',
@@ -427,7 +427,7 @@ export default function Analytics() {
             }}>
               {num}
             </span>
-            <span style={{ fontSize: '12px', color: '#1d4ed8' }}>{label}</span>
+            <span style={{ fontSize: '12px', color: '#800020' }}>{label}</span>
           </div>
         ))}
       </div>

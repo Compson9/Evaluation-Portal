@@ -115,7 +115,7 @@ export default function Lecturers() {
           className="flex items-center gap-2"
           style={{
             padding: '8px 16px',
-            background: '#1d4ed8',
+            background: '#800020',
             border: 'none',
             borderRadius: '8px',
             fontSize: '13px',
@@ -130,7 +130,7 @@ export default function Lecturers() {
 
       {/* Stats Bar */}
       <div style={{
-        background: '#1d4ed8',
+        background: '#800020',
         borderRadius: '10px',
         padding: '14px 20px',
         display: 'flex',
@@ -149,7 +149,7 @@ export default function Lecturers() {
           <div style={{
             width: '28px', height: '28px',
             border: '2px solid #e2e8f0',
-            borderTop: '2px solid #1d4ed8',
+            borderTop: '2px solid #800020',
             borderRadius: '50%',
             animation: 'spin 0.8s linear infinite'
           }} />
@@ -164,9 +164,9 @@ export default function Lecturers() {
         }}>
           <div
             className="flex items-center justify-center rounded-xl mx-auto"
-            style={{ width: '48px', height: '48px', background: '#eff6ff', marginBottom: '12px' }}
+            style={{ width: '48px', height: '48px', background: '#fdf2f2', marginBottom: '12px' }}
           >
-            <Users size={22} color="#1d4ed8" />
+            <Users size={22} color="#800020" />
           </div>
           <p style={{ fontSize: '14px', fontWeight: 500, color: '#0f172a', margin: '0 0 4px' }}>
             No lecturers yet
@@ -217,7 +217,7 @@ export default function Lecturers() {
                   className="flex items-center justify-center rounded-full flex-shrink-0"
                   style={{
                     width: '32px', height: '32px',
-                    background: '#1240ab',
+                    background: '#800020',
                     color: '#ffffff',
                     fontSize: '11px', fontWeight: 500
                   }}
@@ -232,8 +232,8 @@ export default function Lecturers() {
               <span style={{
                 fontSize: '11px', fontWeight: 500,
                 padding: '3px 10px', borderRadius: '20px',
-                background: '#eff6ff', color: '#1d4ed8',
-                border: '0.5px solid #bfdbfe',
+                background: '#fdf2f2', color: '#800020',
+                border: '0.5px solid #fecaca',
                 display: 'inline-block'
               }}>
                 {lecturer.title || '—'}
@@ -372,7 +372,7 @@ export default function Lecturers() {
                 className="flex items-center justify-center gap-2"
                 style={{
                   flex: 1, padding: '10px',
-                  background: '#1d4ed8', border: 'none',
+                  background: '#800020', border: 'none',
                   borderRadius: '8px', fontSize: '13px',
                   color: '#ffffff', cursor: 'pointer',
                   opacity: saving ? 0.7 : 1

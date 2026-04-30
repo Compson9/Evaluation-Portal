@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+:root {
+  --primary-burgundy: #800020;
+  --primary-burgundy-light: #9a1a3a;
+  --primary-burgundy-hover: #5d0018;
+  --bg-white: #ffffff;
+}
+
 ::placeholder {
   color: #475569 !important;
   opacity: 1;

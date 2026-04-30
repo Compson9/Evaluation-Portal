@@ -76,32 +76,32 @@ export default function DashboardHome() {
       value: stats.totalEvaluations,
       icon: FileText,
       color: '#ffffff',
-      bg: '#1d4ed8',        // Royal Blue
-      border: '#1d4ed8'
+      bg: '#800020',        // Burgundy
+      border: '#800020'
     },
     {
       title: 'Total Courses',
       value: stats.totalCourses,
       icon: BookOpen,
       color: '#ffffff',
-      bg: '#0369a1',        // Deep Sky Blue
-      border: '#0369a1'
+      bg: '#9a1a3a',        // Light Burgundy
+      border: '#9a1a3a'
     },
     {
       title: 'Total Lecturers',
       value: stats.totalLecturers,
       icon: Users,
       color: '#ffffff',
-      bg: '#1240ab',        // Vibrant Royal
-      border: '#1240ab'
+      bg: '#5d0018',        // Dark Burgundy
+      border: '#5d0018'
     },
     {
       title: 'Average Rating',
       value: stats.averageRating.toFixed(1),
       icon: Star,
       color: '#ffffff',
-      bg: '#2563eb',        // Bright Blue
-      border: '#2563eb'
+      bg: '#4a0012',        // Deep Burgundy
+      border: '#4a0012'
     }
   ]
 
@@ -114,7 +114,7 @@ export default function DashboardHome() {
             width: '32px',
             height: '32px',
             border: '2px solid #e2e8f0',
-            borderTop: '2px solid #1d4ed8',
+            borderTop: '2px solid #800020',
             animation: 'spin 0.8s linear infinite'
           }}
         />
@@ -152,7 +152,7 @@ export default function DashboardHome() {
                 transition: 'all 0.15s'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#bfdbfe'
+                e.currentTarget.style.borderColor = '#fecaca'
                 e.currentTarget.style.transform = 'translateY(-1px)'
               }}
               onMouseLeave={(e) => {
@@ -192,7 +192,7 @@ export default function DashboardHome() {
               Recent Evaluations
             </p>
             <button
-              style={{ fontSize: '11px', color: '#1d4ed8', background: 'none', border: 'none', cursor: 'pointer' }}
+              style={{ fontSize: '11px', color: '#800020', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600 }}
             >
               View all
             </button>
@@ -202,9 +202,9 @@ export default function DashboardHome() {
             <div style={{ textAlign: 'center', padding: '24px 0' }}>
               <div
                 className="flex items-center justify-center rounded-lg mx-auto"
-                style={{ width: '36px', height: '36px', background: '#eff6ff', marginBottom: '8px' }}
+                style={{ width: '36px', height: '36px', background: '#fdf2f2', marginBottom: '8px' }}
               >
-                <FileText size={16} color="#1d4ed8" />
+                <FileText size={16} color="#800020" />
               </div>
               <p style={{ fontSize: '12px', color: '#64748b', margin: '0 0 2px' }}>
                 No evaluations yet
@@ -226,7 +226,7 @@ export default function DashboardHome() {
             </p>
             <button
               onClick={() => navigate('/qa/lecturers')}
-              style={{ fontSize: '11px', color: '#1d4ed8', background: 'none', border: 'none', cursor: 'pointer' }}
+              style={{ fontSize: '11px', color: '#800020', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600 }}
             >
               View all
             </button>
@@ -247,8 +247,8 @@ export default function DashboardHome() {
                   style={{
                     width: '30px',
                     height: '30px',
-                    background: '#eff6ff',
-                    color: '#1d4ed8',
+                    background: '#fdf2f2',
+                    color: '#800020',
                     fontSize: '11px',
                     fontWeight: 500
                   }}
@@ -287,15 +287,16 @@ export default function DashboardHome() {
       <div
         className="flex items-center justify-between rounded-xl"
         style={{
-          background: '#1d4ed8',
-          padding: '16px 20px'
+          background: '#800020',
+          padding: '24px 20px',
+          boxShadow: '0 4px 20px rgba(128,0,32,0.2)'
         }}
       >
         <div>
           <p style={{ fontSize: '13px', fontWeight: 500, color: '#ffffff', margin: '0 0 2px' }}>
             Ready to collect evaluations?
           </p>
-          <p style={{ fontSize: '12px', color: '#bfdbfe', margin: 0 }}>
+          <p style={{ fontSize: '12px', color: '#fecaca', margin: 0 }}>
             Create your first form and share it with students.
           </p>
         </div>
@@ -304,10 +305,10 @@ export default function DashboardHome() {
           className="flex items-center gap-2 rounded-lg flex-shrink-0"
           style={{
             background: '#ffffff',
-            color: '#1d4ed8',
+            color: '#800020',
             fontSize: '12px',
-            fontWeight: 500,
-            padding: '8px 16px',
+            fontWeight: 600,
+            padding: '10px 20px',
             border: 'none',
             cursor: 'pointer'
           }}

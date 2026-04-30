@@ -224,7 +224,7 @@ export default function Forms() {
               className="flex items-center gap-2"
               style={{
                 padding: '8px 16px',
-                background: '#1d4ed8',
+                background: '#800020',
                 border: 'none',
                 borderRadius: '8px',
                 fontSize: '13px',
@@ -306,11 +306,11 @@ export default function Forms() {
                 className="flex items-center gap-2"
                 style={{
                   padding: '6px 12px',
-                  background: '#eff6ff',
-                  border: '0.5px solid #bfdbfe',
+                  background: '#fdf2f2',
+                  border: '0.5px solid #fecaca',
                   borderRadius: '6px',
                   fontSize: '12px',
-                  color: '#1d4ed8',
+                  color: '#800020',
                   cursor: 'pointer'
                 }}
               >
@@ -324,9 +324,9 @@ export default function Forms() {
             <div style={{ textAlign: 'center', padding: '32px 0' }}>
               <div
                 className="flex items-center justify-center rounded-lg mx-auto"
-                style={{ width: '40px', height: '40px', background: '#eff6ff', marginBottom: '10px' }}
+                style={{ width: '40px', height: '40px', background: '#fdf2f2', marginBottom: '10px' }}
               >
-                <FileText size={18} color="#1d4ed8" />
+                <FileText size={18} color="#800020" />
               </div>
               <p style={{ fontSize: '13px', color: '#64748b', margin: '0 0 4px' }}>No questions yet</p>
               <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0 }}>Add questions or use the default template</p>
@@ -338,7 +338,7 @@ export default function Forms() {
                   <p style={{
                     fontSize: '11px',
                     fontWeight: 500,
-                    color: '#1d4ed8',
+                    color: '#800020',
                     textTransform: 'uppercase',
                     letterSpacing: '0.05em',
                     margin: '12px 0 6px',
@@ -444,7 +444,7 @@ export default function Forms() {
               border: '0.5px solid #e2e8f0',
               borderRadius: '8px',
               fontSize: '13px',
-              color: '#1d4ed8',
+              color: '#800020',
               cursor: 'pointer'
             }}
           >
@@ -455,7 +455,7 @@ export default function Forms() {
             className="flex items-center gap-2"
             style={{
               padding: '8px 16px',
-              background: '#1d4ed8',
+              background: '#800020',
               border: 'none',
               borderRadius: '8px',
               fontSize: '13px',
@@ -476,7 +476,7 @@ export default function Forms() {
             width: '28px',
             height: '28px',
             border: '2px solid #e2e8f0',
-            borderTop: '2px solid #1d4ed8',
+            borderTop: '2px solid #800020',
             borderRadius: '50%',
             animation: 'spin 0.8s linear infinite'
           }} />
@@ -493,9 +493,9 @@ export default function Forms() {
         >
           <div
             className="flex items-center justify-center rounded-xl mx-auto"
-            style={{ width: '48px', height: '48px', background: '#eff6ff', marginBottom: '12px' }}
+            style={{ width: '48px', height: '48px', background: '#fdf2f2', marginBottom: '12px' }}
           >
-            <FileText size={22} color="#1d4ed8" />
+            <FileText size={22} color="#800020" />
           </div>
           <p style={{ fontSize: '14px', fontWeight: 500, color: '#0f172a', margin: '0 0 4px' }}>
             No forms yet
@@ -507,7 +507,7 @@ export default function Forms() {
             onClick={() => openBuilder(true)}
             style={{
               padding: '8px 20px',
-              background: '#1d4ed8',
+              background: '#800020',
               border: 'none',
               borderRadius: '8px',
               fontSize: '13px',
@@ -531,15 +531,15 @@ export default function Forms() {
                 padding: '14px 16px',
                 transition: 'all 0.15s'
               }}
-              onMouseEnter={(e) => e.currentTarget.style.borderColor = '#bfdbfe'}
+              onMouseEnter={(e) => e.currentTarget.style.borderColor = '#fecaca'}
               onMouseLeave={(e) => e.currentTarget.style.borderColor = '#e2e8f0'}
             >
               <div className="flex items-center gap-3">
                 <div
                   className="flex items-center justify-center rounded-lg flex-shrink-0"
-                  style={{ width: '36px', height: '36px', background: '#eff6ff' }}
+                  style={{ width: '36px', height: '36px', background: '#fdf2f2' }}
                 >
-                  <FileText size={16} color="#1d4ed8" />
+                  <FileText size={16} color="#800020" />
                 </div>
                 <div>
                   <p style={{ fontSize: '13px', fontWeight: 500, color: '#0f172a', margin: 0 }}>
@@ -571,7 +571,7 @@ export default function Forms() {
                   style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
                 >
                   {form.is_active
-                    ? <ToggleRight size={20} color="#1d4ed8" />
+                    ? <ToggleRight size={20} color="#800020" />
                     : <ToggleLeft size={20} color="#94a3b8" />
                   }
                 </button>
