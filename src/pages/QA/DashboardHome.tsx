@@ -77,7 +77,8 @@ export default function DashboardHome() {
       icon: FileText,
       color: '#ffffff',
       bg: '#800020',        // Burgundy
-      border: '#800020'
+      border: '#800020',
+      path: '/qa/responses'
     },
     {
       title: 'Total Courses',
@@ -85,7 +86,8 @@ export default function DashboardHome() {
       icon: BookOpen,
       color: '#ffffff',
       bg: '#9a1a3a',        // Light Burgundy
-      border: '#9a1a3a'
+      border: '#9a1a3a',
+      path: '/qa/courses'
     },
     {
       title: 'Total Lecturers',
@@ -93,7 +95,8 @@ export default function DashboardHome() {
       icon: Users,
       color: '#ffffff',
       bg: '#5d0018',        // Dark Burgundy
-      border: '#5d0018'
+      border: '#5d0018',
+      path: '/qa/lecturers'
     },
     {
       title: 'Average Rating',
@@ -101,7 +104,8 @@ export default function DashboardHome() {
       icon: Star,
       color: '#ffffff',
       bg: '#4a0012',        // Deep Burgundy
-      border: '#4a0012'
+      border: '#4a0012',
+      path: '/qa/analytics'
     }
   ]
 
@@ -127,11 +131,11 @@ export default function DashboardHome() {
 
       {/* Greeting */}
       <div>
-        <h1 style={{ fontSize: '20px', fontWeight: 500, color: '#0f172a', margin: 0 }}>
+        <h1 style={{ fontSize: '20px', fontWeight: 700, color: '#0f172a', margin: 0 }}>
           Good {new Date().getHours() < 12 ? 'Morning' : new Date().getHours() < 17 ? 'Afternoon' : 'Evening'},{' '}
           {user?.full_name?.split(' ')[0]} 👋
         </h1>
-        <p style={{ fontSize: '13px', color: '#94a3b8', margin: '2px 0 0' }}>
+        <p style={{ fontSize: '13px', color: '#94a3b8', margin: '2px 0 0', fontWeight: 500 }}>
           Here's an overview of your evaluation system.
         </p>
       </div>
@@ -151,13 +155,16 @@ export default function DashboardHome() {
                 cursor: 'pointer',
                 transition: 'all 0.15s'
               }}
+              onClick={() => navigate(card.path)}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#fecaca'
-                e.currentTarget.style.transform = 'translateY(-1px)'
+                e.currentTarget.style.borderColor = '#800020'
+                e.currentTarget.style.transform = 'translateY(-2px)'
+                e.currentTarget.style.boxShadow = '0 10px 25px rgba(128,0,32,0.1)'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = '#e2e8f0'
                 e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = 'none'
               }}
             >
               <div
@@ -174,7 +181,7 @@ export default function DashboardHome() {
               <p style={{ fontSize: '11px', color: '#94a3b8', margin: '0 0 2px' }}>
                 {card.title}
               </p>
-              <p style={{ fontSize: '24px', fontWeight: 500, color: '#0f172a', margin: 0 }}>
+              <p style={{ fontSize: '24px', fontWeight: 700, color: '#0f172a', margin: 0 }}>
                 {card.value}
               </p>
             </div>

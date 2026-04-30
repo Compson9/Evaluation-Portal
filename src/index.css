@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
 
 :root {
   --primary-burgundy: #800020;
@@ -7,8 +8,20 @@
   --bg-white: #ffffff;
 }
 
+* {
+  font-family: 'Satoshi', sans-serif !important;
+}
+
+body {
+  font-family: 'Satoshi', sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 ::placeholder {
-  color: #475569 !important;
+  color: #94a3b8 !important;
   opacity: 1;
 }
 

@@ -11,6 +11,8 @@ import Programmes from './pages/QA/Programmes'
 import Departments from './pages/QA/Departments'
 import Analytics from './pages/QA/Analytics'
 import StudentEvaluation from './pages/Student/Evaluation'
+import Responses from './pages/QA/Responses'
+
 
 function App() {
   return (
@@ -35,6 +37,7 @@ function App() {
             <Route path="departments" element={<Departments />} />
             <Route path="programmes" element={<Programmes />} />
             <Route path="analytics" element={<Analytics />} />
+            <Route path="responses" element={<Responses />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
