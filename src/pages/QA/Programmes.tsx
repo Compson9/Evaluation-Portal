@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react'
-import { Plus, Trash2, Users, X, Save } from 'lucide-react'
+import { Plus, Trash2, GraduationCap, X, Save } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
-import { type Lecturer, type Department } from '../../types/database.types'
+import { type Programme, type Department } from '../../types/database.types'
 
-interface LecturerWithDept extends Lecturer {
+interface ProgrammeWithDept extends Programme {
   departments?: { name: string }
 }
 
-export default function Lecturers() {
-  const [lecturers, setLecturers] = useState<LecturerWithDept[]>([])
+export default function Programmes() {
+  const [programmes, setProgrammes] = useState<ProgrammeWithDept[]>([])
   const [departments, setDepartments] = useState<Department[]>([])
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [form, setForm] = useState({
-    full_name: '',
-    title: '',
+    name: '',
+    code: '',
     department_id: ''
   })
 
@@ -26,18 +26,18 @@ export default function Lecturers() {
 
   async function fetchData() {
     try {
-      const [{ data: lecturerData }, { data: deptData }] = await Promise.all([
+      const [{ data: progData }, { data: deptData }] = await Promise.all([
         supabase
-          .from('lecturers')
+          .from('programmes')
           .select('*, departments(name)')
-          .order('full_name'),
+          .order('name'),
         supabase
           .from('departments')
           .select('*')
           .order('name')
       ])
 
-      setLecturers(lecturerData || [])
+      setProgrammes(progData || [])
       setDepartments(deptData || [])
     } catch (err) {
       console.error('Error fetching data:', err)
@@ -45,9 +45,9 @@ export default function Lecturers() {
     setLoading(false)
   }
 
-  async function saveLecturer() {
-    if (!form.full_name.trim()) {
-      setError('Full name is required')
+  async function saveProgramme() {
+    if (!form.name.trim() || !form.code.trim()) {
+      setError('Name and code are required')
       return
     }
     if (!form.department_id) {
@@ -60,10 +60,10 @@ export default function Lecturers() {
 
     try {
       const { error } = await supabase
-        .from('lecturers')
+        .from('programmes')
         .insert({
-          full_name: form.full_name.trim(),
-          title: form.title.trim() || null,
+          name: form.name.trim(),
+          code: form.code.trim().toUpperCase(),
           department_id: form.department_id
         })
 
@@ -71,31 +71,24 @@ export default function Lecturers() {
 
       await fetchData()
       setShowModal(false)
-      setForm({ full_name: '', title: '', department_id: '' })
+      setForm({ name: '', code: '', department_id: '' })
     } catch (err: any) {
-      setError(err.message || 'Error saving lecturer')
+      setError(err.message || 'Error saving programme')
     }
 
     setSaving(false)
   }
 
-  async function deleteLecturer(id: string) {
-    if (!confirm('Delete this lecturer?')) return
+  async function deleteProgramme(id: string) {
+    if (!confirm('Delete this programme? Students using this programme may be affected.')) return
 
     try {
-      // Delete course assignments first (foreign key constraint)
-      await supabase.from('course_assignments').delete().eq('lecturer_id', id)
-      
-      // Then delete the lecturer
-      await supabase.from('lecturers').delete().eq('id', id)
-      
-      setLecturers(prev => prev.filter(l => l.id !== id))
+      await supabase.from('programmes').delete().eq('id', id)
+      setProgrammes(prev => prev.filter(p => p.id !== id))
     } catch (err) {
-      console.error('Error deleting lecturer:', err)
+      console.error('Error deleting programme:', err)
     }
   }
-
-  const titles = ['Dr.', 'Prof.', 'Mr.', 'Mrs.', 'Ms.', 'Rev.']
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -104,14 +97,14 @@ export default function Lecturers() {
       <div className="flex items-center justify-between">
         <div>
           <h1 style={{ fontSize: '18px', fontWeight: 500, color: '#0f172a', margin: 0 }}>
-            Lecturers
+            Programmes
           </h1>
           <p style={{ fontSize: '12px', color: '#94a3b8', margin: '2px 0 0' }}>
-            Manage all lecturers
+            Manage academic programmes
           </p>
         </div>
         <button
-          onClick={() => { setShowModal(true); setError(''); setForm({ full_name: '', title: '', department_id: '' }) }}
+          onClick={() => { setShowModal(true); setError(''); setForm({ name: '', code: '', department_id: '' }) }}
           className="flex items-center gap-2"
           style={{
             padding: '8px 16px',
@@ -124,7 +117,7 @@ export default function Lecturers() {
           }}
         >
           <Plus size={14} />
-          Add Lecturer
+          Add Programme
         </button>
       </div>
 
@@ -137,9 +130,9 @@ export default function Lecturers() {
         alignItems: 'center',
         gap: '8px'
       }}>
-        <Users size={18} color="rgba(255,255,255,0.7)" />
+        <GraduationCap size={18} color="rgba(255,255,255,0.7)" />
         <span style={{ fontSize: '13px', color: '#ffffff', fontWeight: 500 }}>
-          {lecturers.length} {lecturers.length === 1 ? 'Lecturer' : 'Lecturers'} registered
+          {programmes.length} {programmes.length === 1 ? 'Programme' : 'Programmes'} registered
         </span>
       </div>
 
@@ -154,7 +147,7 @@ export default function Lecturers() {
             animation: 'spin 0.8s linear infinite'
           }} />
         </div>
-      ) : lecturers.length === 0 ? (
+      ) : programmes.length === 0 ? (
         <div style={{
           background: '#ffffff',
           border: '0.5px solid #e2e8f0',
@@ -166,13 +159,13 @@ export default function Lecturers() {
             className="flex items-center justify-center rounded-xl mx-auto"
             style={{ width: '48px', height: '48px', background: '#eff6ff', marginBottom: '12px' }}
           >
-            <Users size={22} color="#1d4ed8" />
+            <GraduationCap size={22} color="#1d4ed8" />
           </div>
           <p style={{ fontSize: '14px', fontWeight: 500, color: '#0f172a', margin: '0 0 4px' }}>
-            No lecturers yet
+            No programmes yet
           </p>
           <p style={{ fontSize: '13px', color: '#94a3b8', margin: 0 }}>
-            Add your first lecturer to get started
+            Add your first programme to get started
           </p>
         </div>
       ) : (
@@ -183,12 +176,12 @@ export default function Lecturers() {
           overflow: 'hidden'
         }}>
           <div className="grid" style={{
-            gridTemplateColumns: '1fr 120px 1fr 60px',
+            gridTemplateColumns: '120px 1fr 100px 1fr 60px',
             padding: '10px 16px',
             background: '#f8fafc',
             borderBottom: '0.5px solid #e2e8f0'
           }}>
-            {['Lecturer', 'Title', 'Department', ''].map(h => (
+            {['Code', 'Name', 'Department', ''].map(h => (
               <p key={h} style={{
                 fontSize: '11px', fontWeight: 500,
                 color: '#94a3b8', textTransform: 'uppercase',
@@ -199,52 +192,39 @@ export default function Lecturers() {
             ))}
           </div>
 
-          {lecturers.map((lecturer, i) => (
+          {programmes.map((programme, i) => (
             <div
-              key={lecturer.id}
+              key={programme.id}
               className="grid items-center"
               style={{
-                gridTemplateColumns: '1fr 120px 1fr 60px',
+                gridTemplateColumns: '120px 1fr 100px 1fr 60px',
                 padding: '12px 16px',
-                borderBottom: i < lecturers.length - 1 ? '0.5px solid #f1f5f9' : 'none',
+                borderBottom: i < programmes.length - 1 ? '0.5px solid #f1f5f9' : 'none',
                 transition: 'background 0.15s'
               }}
               onMouseEnter={(e) => e.currentTarget.style.background = '#f8faff'}
               onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
             >
-              <div className="flex items-center gap-3">
-                <div
-                  className="flex items-center justify-center rounded-full flex-shrink-0"
-                  style={{
-                    width: '32px', height: '32px',
-                    background: '#1240ab',
-                    color: '#ffffff',
-                    fontSize: '11px', fontWeight: 500
-                  }}
-                >
-                  {lecturer.full_name.split(' ').map(n => n[0]).slice(0, 2).join('')}
-                </div>
-                <p style={{ fontSize: '13px', fontWeight: 500, color: '#0f172a', margin: 0 }}>
-                  {lecturer.full_name}
-                </p>
-              </div>
-
               <span style={{
-                fontSize: '11px', fontWeight: 500,
+                fontSize: '12px', fontWeight: 500,
                 padding: '3px 10px', borderRadius: '20px',
-                background: '#eff6ff', color: '#1d4ed8',
-                border: '0.5px solid #bfdbfe',
+                background: '#e0e7ff', color: '#1d4ed8',
+                border: '0.5px solid #c7d2fe',
                 display: 'inline-block'
               }}>
-                {lecturer.title || '—'}
+                {programme.code}
               </span>
 
+              <p style={{ fontSize: '13px', fontWeight: 500, color: '#0f172a', margin: 0 }}>
+                {programme.name}
+              </p>
+
               <p style={{ fontSize: '12px', color: '#64748b', margin: 0 }}>
-                {(lecturer as any).departments?.name || '—'}
+                {(programme as any).departments?.name || '—'}
               </p>
 
               <button
-                onClick={() => deleteLecturer(lecturer.id)}
+                onClick={() => deleteProgramme(programme.id)}
                 style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
               >
                 <Trash2 size={14} color="#ef4444" />
@@ -271,7 +251,7 @@ export default function Lecturers() {
           }}>
             <div className="flex items-center justify-between" style={{ marginBottom: '20px' }}>
               <h2 style={{ fontSize: '15px', fontWeight: 500, color: '#0f172a', margin: 0 }}>
-                Add Lecturer
+                Add Programme
               </h2>
               <button onClick={() => setShowModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                 <X size={18} color="#94a3b8" />
@@ -295,13 +275,13 @@ export default function Lecturers() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div>
                 <label style={{ fontSize: '12px', fontWeight: 500, color: '#64748b', display: 'block', marginBottom: '6px' }}>
-                  Full Name
+                  Programme Name
                 </label>
                 <input
                   type="text"
-                  value={form.full_name}
-                  onChange={(e) => setForm(prev => ({ ...prev, full_name: e.target.value }))}
-                  placeholder="e.g. John Mensah"
+                  value={form.name}
+                  onChange={(e) => setForm(prev => ({ ...prev, name: e.target.value }))}
+                  placeholder="e.g. BSc Computer Science"
                   style={{
                     width: '100%', padding: '10px 12px',
                     background: '#f8fafc', border: '0.5px solid #e2e8f0',
@@ -313,23 +293,20 @@ export default function Lecturers() {
 
               <div>
                 <label style={{ fontSize: '12px', fontWeight: 500, color: '#64748b', display: 'block', marginBottom: '6px' }}>
-                  Title
+                  Programme Code
                 </label>
-                <select
-                  value={form.title}
-                  onChange={(e) => setForm(prev => ({ ...prev, title: e.target.value }))}
+                <input
+                  type="text"
+                  value={form.code}
+                  onChange={(e) => setForm(prev => ({ ...prev, code: e.target.value }))}
+                  placeholder="e.g. CS-BSC"
                   style={{
                     width: '100%', padding: '10px 12px',
                     background: '#f8fafc', border: '0.5px solid #e2e8f0',
                     borderRadius: '8px', fontSize: '13px',
                     color: '#0f172a', outline: 'none', boxSizing: 'border-box'
                   }}
-                >
-                  <option value="">Select title</option>
-                  {titles.map(t => (
-                    <option key={t} value={t}>{t}</option>
-                  ))}
-                </select>
+                />
               </div>
 
               <div>
@@ -367,7 +344,7 @@ export default function Lecturers() {
                 Cancel
               </button>
               <button
-                onClick={saveLecturer}
+                onClick={saveProgramme}
                 disabled={saving}
                 className="flex items-center justify-center gap-2"
                 style={{

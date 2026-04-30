@@ -32,7 +32,7 @@ export default function Courses() {
 
   async function fetchData() {
     try {
-      const [{ data: courseData }, { data: deptData }] = await Promise.all([
+      const [{ data: courseData }, { data: deptData }, { data: lectData }] = await Promise.all([
         supabase
           .from('courses')
           .select('*, departments(name)')
@@ -40,12 +40,16 @@ export default function Courses() {
         supabase
           .from('departments')
           .select('*')
-          .order('name')
+          .order('name'),
+        supabase
+          .from('lecturers')
+          .select('*')
+          .order('full_name')
       ])
 
       setCourses(courseData || [])
       setDepartments(deptData || [])
-      setLecturers([])
+      setLecturers(lectData || [])
     } catch (err) {
       console.error('Error fetching data:', err)
     }
@@ -61,12 +65,17 @@ export default function Courses() {
       setError('Please select a department')
       return
     }
+    if (!form.lecturer_id) {
+      setError('Please select a lecturer')
+      return
+    }
 
     setSaving(true)
     setError('')
 
     try {
-      const { error } = await supabase
+      // Create the course
+      const { data: courseData, error: courseError } = await supabase
         .from('courses')
         .insert({
           code: form.code.trim().toUpperCase(),
@@ -74,8 +83,23 @@ export default function Courses() {
           level: parseInt(form.level),
           department_id: form.department_id
         })
+        .select()
+        .single()
 
-      if (error) throw error
+      if (courseError) throw courseError
+
+      // Create the course assignment (links lecturer to course)
+      const { error: assignError } = await supabase
+        .from('course_assignments')
+        .insert({
+          course_id: courseData.id,
+          lecturer_id: form.lecturer_id,
+          semester: form.semester,
+          year: parseInt(form.year),
+          session: form.session
+        })
+
+      if (assignError) throw assignError
 
       await fetchData()
       setShowModal(false)
@@ -91,7 +115,12 @@ export default function Courses() {
     if (!confirm('Delete this course?')) return
 
     try {
+      // Delete course assignments first (foreign key constraint)
+      await supabase.from('course_assignments').delete().eq('course_id', id)
+      
+      // Then delete the course
       await supabase.from('courses').delete().eq('id', id)
+      
       setCourses(prev => prev.filter(c => c.id !== id))
     } catch (err) {
       console.error('Error deleting course:', err)
@@ -376,6 +405,90 @@ export default function Courses() {
                     <option key={d.id} value={d.id}>{d.name}</option>
                   ))}
                 </select>
+              </div>
+
+              <div>
+                <label style={{ fontSize: '12px', fontWeight: 500, color: '#64748b', display: 'block', marginBottom: '6px' }}>
+                  Lecturer
+                </label>
+                <select
+                  value={form.lecturer_id}
+                  onChange={(e) => setForm(prev => ({ ...prev, lecturer_id: e.target.value }))}
+                  style={{
+                    width: '100%', padding: '10px 12px',
+                    background: '#f8fafc', border: '0.5px solid #e2e8f0',
+                    borderRadius: '8px', fontSize: '13px',
+                    color: '#0f172a', outline: 'none', boxSizing: 'border-box'
+                  }}
+                >
+                  <option value="">Select Lecturer</option>
+                  {lecturers
+                    .filter(l => l.department_id === form.department_id)
+                    .map(l => (
+                      <option key={l.id} value={l.id}>
+                        {l.full_name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
+                <div>
+                  <label style={{ fontSize: '12px', fontWeight: 500, color: '#64748b', display: 'block', marginBottom: '4px' }}>
+                    Semester
+                  </label>
+                  <select
+                    value={form.semester}
+                    onChange={(e) => setForm(prev => ({ ...prev, semester: e.target.value }))}
+                    style={{
+                      width: '100%', padding: '8px 10px',
+                      background: '#f8fafc', border: '0.5px solid #e2e8f0',
+                      borderRadius: '8px', fontSize: '13px',
+                      color: '#0f172a', outline: 'none', boxSizing: 'border-box'
+                    }}
+                  >
+                    <option>Semester 1</option>
+                    <option>Semester 2</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label style={{ fontSize: '12px', fontWeight: 500, color: '#64748b', display: 'block', marginBottom: '4px' }}>
+                    Year
+                  </label>
+                  <input
+                    type="number"
+                    value={form.year}
+                    onChange={(e) => setForm(prev => ({ ...prev, year: e.target.value }))}
+                    style={{
+                      width: '100%', padding: '8px 10px',
+                      background: '#f8fafc', border: '0.5px solid #e2e8f0',
+                      borderRadius: '8px', fontSize: '13px',
+                      color: '#0f172a', outline: 'none', boxSizing: 'border-box'
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ fontSize: '12px', fontWeight: 500, color: '#64748b', display: 'block', marginBottom: '4px' }}>
+                    Session
+                  </label>
+                  <select
+                    value={form.session}
+                    onChange={(e) => setForm(prev => ({ ...prev, session: e.target.value }))}
+                    style={{
+                      width: '100%', padding: '8px 10px',
+                      background: '#f8fafc', border: '0.5px solid #e2e8f0',
+                      borderRadius: '8px', fontSize: '13px',
+                      color: '#0f172a', outline: 'none', boxSizing: 'border-box'
+                    }}
+                  >
+                    <option>Morning</option>
+                    <option>Afternoon</option>
+                    <option>Evening</option>
+                    <option>Weekend</option>
+                  </select>
+                </div>
               </div>
             </div>
 

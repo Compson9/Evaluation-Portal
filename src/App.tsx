@@ -7,6 +7,7 @@ import DashboardHome from './pages/QA/DashboardHome'
 import Forms from './pages/QA/Forms'
 import Courses from './pages/QA/Courses'
 import Lecturers from './pages/QA/Lecturers'
+import Programmes from './pages/QA/Programmes'
 import Departments from './pages/QA/Departments'
 import Analytics from './pages/QA/Analytics'
 import StudentEvaluation from './pages/Student/Evaluation'
@@ -32,6 +33,7 @@ function App() {
             <Route path="courses" element={<Courses />} />
             <Route path="lecturers" element={<Lecturers />} />
             <Route path="departments" element={<Departments />} />
+            <Route path="programmes" element={<Programmes />} />
             <Route path="analytics" element={<Analytics />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
