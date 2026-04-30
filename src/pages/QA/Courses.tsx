@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Plus, Trash2, BookOpen, X, Save } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
-import { type Course, type Department } from '../../types/database.types'
+import { type Course, type Department, type Lecturer } from '../../types/database.types'
 
 interface CourseWithDept extends Course {
   departments?: { name: string }
@@ -18,8 +18,13 @@ export default function Courses() {
     code: '',
     title: '',
     level: '100',
-    department_id: ''
+    department_id: '',
+    lecturer_id: '',
+    semester: 'Semester 1',
+    year: new Date().getFullYear().toString(),
+    session: 'Morning'
   })
+  const [lecturers, setLecturers] = useState<Lecturer[]>([])
 
   useEffect(() => {
     fetchData()
@@ -40,6 +45,7 @@ export default function Courses() {
 
       setCourses(courseData || [])
       setDepartments(deptData || [])
+      setLecturers([])
     } catch (err) {
       console.error('Error fetching data:', err)
     }
@@ -73,7 +79,7 @@ export default function Courses() {
 
       await fetchData()
       setShowModal(false)
-      setForm({ code: '', title: '', level: '100', department_id: '' })
+      setForm({ code: '', title: '', level: '100', department_id: '', lecturer_id: '', semester: 'Semester 1', year: new Date().getFullYear().toString(), session: 'Morning' })
     } catch (err: any) {
       setError(err.message || 'Error saving course')
     }
@@ -113,7 +119,7 @@ export default function Courses() {
           </p>
         </div>
         <button
-          onClick={() => { setShowModal(true); setError(''); setForm({ code: '', title: '', level: '100', department_id: '' }) }}
+          onClick={() => { setShowModal(true); setError(''); setForm({ code: '', title: '', level: '100', department_id: '', lecturer_id: '', semester: 'Semester 1', year: new Date().getFullYear().toString(), session: 'Morning' }) }}
           className="flex items-center gap-2"
           style={{
             padding: '8px 16px',

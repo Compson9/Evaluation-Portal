@@ -16,11 +16,8 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Public Routes */}
           <Route path="/" element={<StudentEvaluation />} />
           <Route path="/qa/login" element={<QALogin />} />
-
-          {/* Protected QA Routes */}
           <Route
             path="/qa"
             element={
@@ -37,8 +34,6 @@ function App() {
             <Route path="departments" element={<Departments />} />
             <Route path="analytics" element={<Analytics />} />
           </Route>
-
-          {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

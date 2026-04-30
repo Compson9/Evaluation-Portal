@@ -349,10 +349,7 @@ export default function Forms() {
                   {questions
                     .filter(q => q.section === section)
                     .map((q, sectionIndex) => {
-                      const globalIndex = questions.findIndex(
-                        (gq, gi) => gq.section === section &&
-                        questions.filter((fq, fi) => fq.section === section && fi <= gi).length - 1 === sectionIndex
-                      )
+                     
                       const actualIndex = questions.indexOf(
                         questions.filter(fq => fq.section === section)[sectionIndex]
                       )
