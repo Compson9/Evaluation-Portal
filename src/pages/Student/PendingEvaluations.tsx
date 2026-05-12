@@ -140,7 +140,7 @@ export default function PendingEvaluations() {
             <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0f172a', margin: '0 0 8px' }}>No Active Evaluations</h2>
             <p style={{ fontSize: '14px', color: '#64748b', margin: '0 0 24px' }}>There are currently no evaluation forms active for this semester.</p>
             <button onClick={() => navigate('/results')} style={{ padding: '12px 24px', background: '#800020', border: 'none', borderRadius: '8px', color: '#fff', fontWeight: 600, cursor: 'pointer' }}>
-              Continue to Mock Results
+              Continue to Results
             </button>
           </div>
         ) : pending.length === 0 && totalCount === 0 ? (
@@ -149,7 +149,7 @@ export default function PendingEvaluations() {
             <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0f172a', margin: '0 0 8px' }}>No Course Enrollments</h2>
             <p style={{ fontSize: '14px', color: '#64748b', margin: '0 0 24px' }}>You are not enrolled in any courses for the current evaluation period.</p>
             <button onClick={() => navigate('/results')} style={{ padding: '12px 24px', background: '#800020', border: 'none', borderRadius: '8px', color: '#fff', fontWeight: 600, cursor: 'pointer' }}>
-              Continue to Mock Results
+              Continue to Results
             </button>
           </div>
         ) : (
