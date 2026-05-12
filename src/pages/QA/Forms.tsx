@@ -180,10 +180,18 @@ export default function Forms() {
     if (!confirm('Are you sure you want to delete this form?')) return
 
     try {
-      await supabase.from('evaluation_forms').delete().eq('id', formId)
+      const { error: deleteError } = await supabase.from('evaluation_forms').delete().eq('id', formId)
+
+      if (deleteError) {
+        console.error('Error deleting form:', deleteError)
+        alert(`Failed to delete form: ${deleteError.message}`)
+        return
+      }
+
       setForms(prev => prev.filter(f => f.id !== formId))
     } catch (error) {
-      console.error('Error deleting form:', error)
+      console.error('Unexpected error deleting form:', error)
+      alert('An unexpected error occurred while deleting the form.')
     }
   }
 

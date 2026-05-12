@@ -60,10 +60,18 @@ export default function Departments() {
     if (!confirm('Delete this department? This may affect related courses and programmes.')) return
 
     try {
-      await supabase.from('departments').delete().eq('id', id)
+      const { error: deleteError } = await supabase.from('departments').delete().eq('id', id)
+
+      if (deleteError) {
+        console.error('Error deleting department:', deleteError)
+        alert(`Failed to delete department: ${deleteError.message}`)
+        return
+      }
+
       setDepartments(prev => prev.filter(d => d.id !== id))
     } catch (err) {
-      console.error('Error deleting department:', err)
+      console.error('Unexpected error deleting department:', err)
+      alert('An unexpected error occurred while deleting the department.')
     }
   }
 

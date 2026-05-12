@@ -112,18 +112,26 @@ export default function Courses() {
   }
 
   async function deleteCourse(id: string) {
-    if (!confirm('Delete this course?')) return
+    if (!confirm('Delete this course and all associated data?')) return
 
     try {
-      // Delete course assignments first (foreign key constraint)
-      await supabase.from('course_assignments').delete().eq('course_id', id)
-      
-      // Then delete the course
-      await supabase.from('courses').delete().eq('id', id)
-      
+      // CASCADE constraints handle cleanup of course_assignments,
+      // student_responses, and response_answers automatically
+      const { error } = await supabase
+        .from('courses')
+        .delete()
+        .eq('id', id)
+
+      if (error) {
+        console.error('Error deleting course:', error)
+        alert(`Failed to delete course: ${error.message}`)
+        return
+      }
+
       setCourses(prev => prev.filter(c => c.id !== id))
     } catch (err) {
-      console.error('Error deleting course:', err)
+      console.error('Unexpected error deleting course:', err)
+      alert('An unexpected error occurred while deleting the course.')
     }
   }
 

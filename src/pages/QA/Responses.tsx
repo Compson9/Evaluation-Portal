@@ -7,7 +7,7 @@ interface Response {
   student_id: string
   submitted_at: string
   level: number
-  programmes?: { name: string } | null
+  departments?: { name: string } | null
   course_assignments?: {
     semester: string
     year: number
@@ -53,7 +53,7 @@ export default function Responses() {
         .from('student_responses')
         .select(`
           id, student_id, submitted_at, level,
-          programmes ( name ),
+          departments ( name ),
           course_assignments (
             semester, year, session,
             courses ( code, title ),
@@ -362,8 +362,8 @@ export default function Responses() {
               <div className="flex items-center gap-2">
                 <BookOpen size={14} color="#94a3b8" />
                 <div>
-                  <p style={{ fontSize: '10px', color: '#94a3b8', margin: 0, textTransform: 'uppercase' }}>Programme</p>
-                  <p style={{ fontSize: '12px', fontWeight: 600, color: '#0f172a', margin: 0 }}>{selectedResponse.programmes?.name || 'N/A'}</p>
+                  <p style={{ fontSize: '10px', color: '#94a3b8', margin: 0, textTransform: 'uppercase' }}>Department</p>
+                  <p style={{ fontSize: '12px', fontWeight: 600, color: '#0f172a', margin: 0 }}>{selectedResponse.departments?.name || 'N/A'}</p>
                 </div>
               </div>
             </div>

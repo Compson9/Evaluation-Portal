@@ -7,10 +7,13 @@ import DashboardHome from './pages/QA/DashboardHome'
 import Forms from './pages/QA/Forms'
 import Courses from './pages/QA/Courses'
 import Lecturers from './pages/QA/Lecturers'
-import Programmes from './pages/QA/Programmes'
+import Students from './pages/QA/Students'
 import Departments from './pages/QA/Departments'
 import Analytics from './pages/QA/Analytics'
+import PortalLogin from './pages/Student/PortalLogin'
+import PendingEvaluations from './pages/Student/PendingEvaluations'
 import StudentEvaluation from './pages/Student/Evaluation'
+import MockResults from './pages/Student/MockResults'
 import Responses from './pages/QA/Responses'
 
 
@@ -19,7 +22,10 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<StudentEvaluation />} />
+          <Route path="/" element={<PortalLogin />} />
+          <Route path="/pending" element={<PendingEvaluations />} />
+          <Route path="/evaluate/:assignmentId" element={<StudentEvaluation />} />
+          <Route path="/results" element={<MockResults />} />
           <Route path="/qa/login" element={<QALogin />} />
           <Route
             path="/qa"
@@ -34,8 +40,8 @@ function App() {
             <Route path="forms" element={<Forms />} />
             <Route path="courses" element={<Courses />} />
             <Route path="lecturers" element={<Lecturers />} />
+            <Route path="students" element={<Students />} />
             <Route path="departments" element={<Departments />} />
-            <Route path="programmes" element={<Programmes />} />
             <Route path="analytics" element={<Analytics />} />
             <Route path="responses" element={<Responses />} />
           </Route>

@@ -78,8 +78,8 @@ export default function QADashboard() {
     { name: 'Forms', path: '/qa/forms', icon: FileText },
     { name: 'Courses', path: '/qa/courses', icon: BookOpen },
     { name: 'Lecturers', path: '/qa/lecturers', icon: Users },
+    { name: 'Students', path: '/qa/students', icon: GraduationCap },
     { name: 'Departments', path: '/qa/departments', icon: Building2 },
-    { name: 'Programmes', path: '/qa/programmes', icon: GraduationCap },
     { name: 'Analytics', path: '/qa/analytics', icon: BarChart3 },
   ]
 

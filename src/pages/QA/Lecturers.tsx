@@ -80,18 +80,26 @@ export default function Lecturers() {
   }
 
   async function deleteLecturer(id: string) {
-    if (!confirm('Delete this lecturer?')) return
+    if (!confirm('Delete this lecturer and all associated data?')) return
 
     try {
-      // Delete course assignments first (foreign key constraint)
-      await supabase.from('course_assignments').delete().eq('lecturer_id', id)
-      
-      // Then delete the lecturer
-      await supabase.from('lecturers').delete().eq('id', id)
-      
+      // CASCADE constraints handle cleanup of course_assignments,
+      // student_responses, and response_answers automatically
+      const { error } = await supabase
+        .from('lecturers')
+        .delete()
+        .eq('id', id)
+
+      if (error) {
+        console.error('Error deleting lecturer:', error)
+        alert(`Failed to delete lecturer: ${error.message}`)
+        return
+      }
+
       setLecturers(prev => prev.filter(l => l.id !== id))
     } catch (err) {
-      console.error('Error deleting lecturer:', err)
+      console.error('Unexpected error deleting lecturer:', err)
+      alert('An unexpected error occurred while deleting the lecturer.')
     }
   }
 

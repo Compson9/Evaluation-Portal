@@ -83,10 +83,18 @@ export default function Programmes() {
     if (!confirm('Delete this programme? Students using this programme may be affected.')) return
 
     try {
-      await supabase.from('programmes').delete().eq('id', id)
+      const { error: deleteError } = await supabase.from('programmes').delete().eq('id', id)
+
+      if (deleteError) {
+        console.error('Error deleting programme:', deleteError)
+        alert(`Failed to delete programme: ${deleteError.message}`)
+        return
+      }
+
       setProgrammes(prev => prev.filter(p => p.id !== id))
     } catch (err) {
-      console.error('Error deleting programme:', err)
+      console.error('Unexpected error deleting programme:', err)
+      alert('An unexpected error occurred while deleting the programme.')
     }
   }
 

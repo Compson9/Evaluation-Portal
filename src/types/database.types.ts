@@ -5,13 +5,7 @@ export type Department = {
   created_at: string
 }
 
-export type Programme = {
-  id: string
-  name: string
-  code: string
-  department_id: string
-  created_at: string
-}
+
 
 export type Lecturer = {
   id: string
@@ -66,10 +60,26 @@ export type FormQuestion = {
   created_at: string
 }
 
+export type Student = {
+  id: string
+  index_number: string
+  full_name: string
+  department_id: string
+  level: number
+  created_at: string
+}
+
+export type StudentEnrollment = {
+  id: string
+  student_id: string
+  course_assignment_id: string
+  created_at: string
+}
+
 export type StudentResponse = {
   id: string
   student_id: string
-  programme_id: string
+  department_id: string
   level: number
   course_assignment_id: string
   form_id: string
